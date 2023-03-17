@@ -1,0 +1,14 @@
+parameters:
+  temperature: 0.0
+agents:
+  ALICE:
+    prompt: |-
+      You are Alice and are having a conversation with Bob.
+  BOB:
+    prompt: |-
+     You are Bob and are having a conversation with Alice.
+messages:
+  - ALICE: |-
+      Hello Bob, how are you?
+  - BOB: |-
+      I'm well Alice, thanks for asking. How are you?

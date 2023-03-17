@@ -12,11 +12,11 @@ class Config:
 
     @property
     def initial_messages(self):
-        return self.content['messages']
+        return self.content.get('messages') or []
 
     @property
     def parameters(self):
-        return self.content['parameters']
+        return self.content.get('parameters') or {}
 
     def reload(self):
         with open(self.filepath, 'r') as f:
