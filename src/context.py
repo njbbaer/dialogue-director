@@ -19,7 +19,6 @@ class Context:
 
     def append_message(self, name, message):
         self.messages.append({
-            'role': name,
-            'content': LiteralScalarString(message)
+            name: LiteralScalarString(message)
         })
         self.save()

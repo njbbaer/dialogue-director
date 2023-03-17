@@ -20,7 +20,7 @@ class Conversation:
     def _speak(self, name):
         rendered_messages = self._render_messages(name)
         response = self.llm.complete(rendered_messages)
-        print(f'{name.upper()}: {response}\n')
+        print(f'{name}: {response}\n')
         self.context.append_message(name, response)
         return response
 
@@ -30,9 +30,10 @@ class Conversation:
             'content': self.config.prompt(name)
         }]
         for message in self.context.messages:
+            name_, content = list(message.items())[0]
             rendered_messages.append({
-                'role': 'assistant' if message['role'] == name else 'user',
-                'content': message['content']
+                'role': 'assistant' if name_ == name else 'user',
+                'content': content
             })
         return rendered_messages
 
