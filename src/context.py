@@ -4,17 +4,17 @@ from src.yaml_setup import yaml
 
 
 class Context:
-    CONTEXT_FILE = 'context.yml'
+    DEFAULT_FILEPATH = 'context.yml'
 
     def __init__(self, messages):
         self.messages = messages
 
     def reload(self,):
-        with open(self.CONTEXT_FILE, 'r') as f:
+        with open(self.DEFAULT_FILEPATH, 'r') as f:
             self.messages = yaml.load(f)
 
     def save(self):
-        with open(self.CONTEXT_FILE, 'w') as f:
+        with open(self.DEFAULT_FILEPATH, 'w') as f:
             yaml.dump(self.messages, f)
 
     def append_message(self, name, message):

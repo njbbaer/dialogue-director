@@ -1,8 +1,10 @@
 import sys
+import argparse
 
-from src.conversation import Conversation
+from src.dialogue import Dialogue
 
-if __name__ == '__main__':
-    filename = sys.argv[1]
-    conversation = Conversation(filename)
-    conversation.run()
+parser = argparse.ArgumentParser()
+parser.add_argument("config", help="location of the configuration file")
+args = parser.parse_args()
+
+Dialogue(args.config, interactive=True).loop()

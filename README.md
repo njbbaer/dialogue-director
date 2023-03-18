@@ -12,7 +12,13 @@ Dialogue Director is a Python-based application that facilitates conversations b
 pip install -r requirements.txt
 ```
 
-2. Run the application:
+2. Run tests:
+
+```shell
+python -m unittest
+```
+
+3. Run the application:
 
 ```shell
 python dialogue_director.py example.yml
