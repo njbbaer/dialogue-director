@@ -1,3 +1,4 @@
-*.yml
-!example.yml
+configs/*
+!configs/example.yml
+contexts/
 *.pyc

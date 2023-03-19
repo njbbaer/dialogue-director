@@ -6,9 +6,9 @@ from src.llm import OpenAI
 
 
 class Dialogue:
-    def __init__(self, filepath, interactive=False):
-        self.config = Config(filepath)
-        self.context = Context(self.config.initial_messages)
+    def __init__(self, filename, interactive=False):
+        self.config = Config(filename)
+        self.context = Context(self.config)
         self.llm = OpenAI(self.config)
         self.interactive = interactive
 
