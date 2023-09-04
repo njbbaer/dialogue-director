@@ -1,4 +1,4 @@
-configs/*
-!configs/example.yml
+configs/
 contexts/
+!configs/example.yml
 *.pyc

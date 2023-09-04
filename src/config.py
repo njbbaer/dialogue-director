@@ -2,8 +2,8 @@ from src.yaml_setup import yaml
 
 
 class Config:
-    def __init__(self, filename):
-        self.filename = filename
+    def __init__(self, filepath):
+        self.filepath = filepath
         self.reload()
 
     @property
@@ -19,7 +19,7 @@ class Config:
         return self.content.get('parameters') or {}
 
     def reload(self):
-        with open(self.filename, 'r') as f:
+        with open(self.filepath, 'r') as f:
             self.content = yaml.load(f)
 
     def prompt(self, name):
