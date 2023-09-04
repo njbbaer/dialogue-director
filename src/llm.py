@@ -19,7 +19,7 @@ class OpenAI(LLM):
     }
 
     @backoff.on_exception(backoff.expo, openai.error.RateLimitError)
-    def complete(self, messages: str) -> str:
+    def complete(self, messages):
         return openai.ChatCompletion.create(
             **self._parameters(),
             messages=messages,

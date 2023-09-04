@@ -16,7 +16,7 @@ class TestDialogue(TestCase):
     @mock.patch('openai.ChatCompletion.create')
     def test_run(self, mock_chat_completion, mock_print):
         mock_chat_completion.return_value = {
-            'choices': [{'message': {'content': 'Hello, how can I assist you?'}}],
+            'choices': [{'message': {'content': 'Foo'}}],
         }
 
         dialogue = Dialogue('configs/example.yml')
@@ -29,9 +29,9 @@ class TestDialogue(TestCase):
             - BOB: |-
                 I'm well Alice, thanks for asking. How are you?
             - ALICE: |-
-                Hello, how can I assist you?
+                Foo
             - BOB: |-
-                Hello, how can I assist you?
+                Foo
             '''))
 
     def tearDown(self):
