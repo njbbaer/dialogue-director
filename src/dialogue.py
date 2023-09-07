@@ -3,6 +3,7 @@ import sys
 from src.context import Context
 from src.config import Config
 from src.llm import OpenAI
+from src.message import Message
 
 
 class Dialogue:
@@ -25,16 +26,18 @@ class Dialogue:
     def _speak(self, name):
         rendered_messages = self._render_messages(name)
         response = self.llm.complete(rendered_messages)
-        self.context.append_message(name, response)
-        print(f'{name}: {response}\n')
+        message = Message.create(name, response, self.config.rlp_mode)
+        self.context.append_message(message)
+        message.print()
         return response
 
     def _render_messages(self, name):
         rendered_messages = [{'role': 'system', 'content': self.config.prompt(name)}]
         for message in self.context.messages:
-            name_, content = list(message.items())[0]
-            role = 'assistant' if name_ == name else 'user'
-            rendered_messages.append({'role': role, 'content': content})
+            author, content = list(message.items())[0]
+            message = Message.create(author, content, self.config.rlp_mode)
+            rendered_message = message.render_message(name)
+            rendered_messages.append(rendered_message)
         return rendered_messages
 
     def _pause(self):
@@ -43,3 +46,4 @@ class Dialogue:
         sys.stdout.write("\033[K")  # Clear the current line
         self.context.reload()
         self.config.reload()
+

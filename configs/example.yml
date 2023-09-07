@@ -1,5 +1,6 @@
 parameters:
   temperature: 0.0
+  model: gpt-3.5-turbo
 agents:
   ALICE:
     prompt: |-

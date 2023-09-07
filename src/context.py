@@ -18,9 +18,9 @@ class Context:
         with open(self.filepath, 'w') as f:
             yaml.dump(self.messages, f)
 
-    def append_message(self, name, message):
+    def append_message(self, message):
         self.messages.append({
-            name: LiteralScalarString(message)
+            message.author: LiteralScalarString(message.content)
         })
         self.save()
 
