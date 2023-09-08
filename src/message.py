@@ -1,16 +1,30 @@
 import re
+from ruamel.yaml.scalarstring import LiteralScalarString
 
 
 class Message:
     def __init__(self, author, content):
         self.author = author
         self.content = content
+        self.message_type = 'normal'
 
-    def create(author, content, rlp_mode):
-        if rlp_mode:
+    @staticmethod
+    def create(author, content, message_type):
+        if message_type == 'rlp':
             return RLPMessage(author, content)
         else:
             return Message(author, content)
+
+    @staticmethod
+    def from_dict(data):
+        return Message.create(data['author'], data['content'], data['type'])
+
+    def to_dict(self):
+        return {
+            'author': self.author,
+            'type': self.message_type,
+            'content': LiteralScalarString(self.content)
+        }
 
     def render_message(self, perspetive):
         return {
@@ -19,15 +33,16 @@ class Message:
         }
 
     def print(self):
-        print(f'{self.author}: {self.content}')
+        print(f'{self.author}: {self.content}\n')
 
-    def _render_content(self, perspective):
+    def _render_content(self, _):
         return self.content
 
 
 class RLPMessage(Message):
     def __init__(self, author, content):
         super().__init__(author, content)
+        self.message_type = 'rlp'
         self.rlp_schema = [
             {
                 'name': 'THINKS',
@@ -61,7 +76,8 @@ class RLPMessage(Message):
         for component in self.rlp_schema:
             if not component['private']:
                 match = re.search(component['regex'], self.content, re.DOTALL)
-                print(f'> {component["name"]}: {match.group(1)}')
+                if (match):
+                    print(f'> {component["name"]}: {match.group(1)}')
         print()
 
     def _validate(self):

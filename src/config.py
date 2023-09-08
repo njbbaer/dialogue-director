@@ -18,13 +18,12 @@ class Config:
     def parameters(self):
         return self.config.get('parameters') or {}
 
-    @property
-    def rlp_mode(self):
-        return self.config.get('rlp_mode') or False
-
     def reload(self):
         with open(self.filepath, 'r') as f:
             self.config = yaml.load(f)
 
-    def prompt(self, name):
+    def get_prompt(self, name):
         return self.agents[name]['prompt']
+
+    def get_message_type(self, name):
+        return self.agents[name].get('type') or 'normal'

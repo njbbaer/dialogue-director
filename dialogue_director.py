@@ -7,4 +7,4 @@ parser = argparse.ArgumentParser()
 parser.add_argument("config", help="location of the configuration file")
 args = parser.parse_args()
 
-Dialogue(args.config, interactive=True).loop()
+Dialogue(args.config).loop()
