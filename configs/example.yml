@@ -1,15 +1,16 @@
 parameters:
-  temperature: 0.0
   model: gpt-3.5-turbo
 agents:
-  ALICE:
+  Alice:
     prompt: |-
       You are Alice and are having a conversation with Bob.
-  BOB:
+  Bob:
     prompt: |-
      You are Bob and are having a conversation with Alice.
 messages:
-  - ALICE: |-
+  - author: Alice
+    content: |-
       Hello Bob, how are you?
-  - BOB: |-
+  - author: Bob
+    content: |-
       I'm well Alice, thanks for asking. How are you?
