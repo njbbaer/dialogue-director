@@ -17,7 +17,7 @@ class Message:
 
     @staticmethod
     def from_dict(data):
-        return Message.create(data['author'], data['content'], data['type'])
+        return Message.create(data['author'], data['content'], data.get('type'))
 
     def to_dict(self):
         return {
